@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://slot-swapper-auu6.onrender.com/api', 
+  baseURL: 'https://slot-swapper-auu6.onrender.com/api',
 });
 
 export const setAuthToken = (token) => {
@@ -13,16 +13,19 @@ export const setAuthToken = (token) => {
 };
 
 
+export const registerUser = (data) => api.post('/auth/register', data);
+export const loginUser = (data) => api.post('/auth/login', data);
+
+
 export const getMyEvents = () => api.get('/events');
 export const createEvent = (eventData) => api.post('/events', eventData);
 export const updateEventStatus = (id, status) => api.put(`/events/${id}`, { status });
 
-// Swap API functions
+
 export const getSwappableSlots = () => api.get('/swap/swappable-slots');
 export const getMySwappableEvents = () => api.get('/events/swappable');
-export const createSwapRequest = (mySlotId, theirSlotId) => 
+export const createSwapRequest = (mySlotId, theirSlotId) =>
   api.post('/swap/swap-request', { mySlotId, theirSlotId });
-
 export const getMySwapRequests = () => api.get('/swap/requests');
 export const respondToSwapRequest = (requestId, accept) =>
   api.post(`/swap/swap-response/${requestId}`, { accept });
